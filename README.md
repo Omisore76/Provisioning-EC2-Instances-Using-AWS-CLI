@@ -4,4 +4,4 @@ Hey there! This is the code repository for my AWS EC2 provisioning. In this repo
 
 I created this VPC and subnets all on my own - you can check out how I did that by clicking on the link above.
 
-Note: I created the VPC and subnets earlier. You can access the VPC and subnets code using this link.
+Note: I created the VPC and subnets earlier. You can access the VPC and subnets code using this link https://github.com/Omisore76/Creating-VPC-and-Subnets-Using-AWS-CLI

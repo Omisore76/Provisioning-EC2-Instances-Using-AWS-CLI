@@ -1,0 +1,20 @@
+Launching Multiple EC2 Instances Into Different Public Subnets Using The CLI
+
+
+Creating a keypair
+aws ec2 create-key-pair --key-name DemoKeypair --query "KeyMaterial" --output text > DemoKeypair.pem
+
+Creating a security group
+aws ec2 create-security-group --group-name SSHHTTPACCESS --description "SSH and HTTP security group" --vpc-id vpc-08b173748b92b8969
+
+Adding rules to allow both SSH and HTTP Connection
+aws ec2 authorize-security-group-ingress --group-id sg-054c8d32fabb909e0 --protocol tcp --port 22 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id sg-054c8d32fabb909e0 --protocol tcp --port 80 --cidr 0.0.0.0/0
+
+Launching instances into my public subnets
+Instance1: Public_EC2_01
+aws ec2 run-instances --image-id ami-090fa75af13c156b4 --count 1 --instance-type t2.micro --key-name DemoKeypair --security-group-ids sg-054c8d32fabb909e0 --subnet-id subnet-0d6b934f554a6871f --user-data file://user_data.txt
+
+Instance2:Public_EC2_01
+aws ec2 run-instances --image-id ami-090fa75af13c156b4 --count 1 --instance-type t2.micro --key-name DemoKeypair --security-group-ids sg-054c8d32fabb909e0 --subnet-id subnet-058e7c626193db3fc --user-data file://user_data.txt
+
